@@ -1,15 +1,10 @@
 import tkinter as tk
-import random
 
-# ------------------------
-# 5 matematičnih vprašanj (fiksna)
-# ------------------------
-math_questions = [
-    ("Ps1 Hagrid","yes"),
-    ("John asks: what's 2 + 2 ?? >:)", "4"),
-    ("heisenburger"),
-    ("wuts 9 + 10?","21"),
-    ("johngpt?", "yes"),
+questions = [
+    ("Koliko je 124 / 2?", "62"),
+    ("\n 2x + 5 = x + 8, \n Koliko je x?", "3"),
+    ("Glavno mesto Slovenije?", "Ljubljana"),
+    ("Kaj je: 'Was it a car or a cat I saw' obratno?", "was it a car or a cat I saw"),
 ]
 
 
@@ -20,9 +15,7 @@ class Quiz:
 
         self.score = 0
         self.index = 0
-
-        # 5 math + 5 random slovene
-        self.questions = math_questions
+        self.questions = questions
 
         self.label = tk.Label(root, text="", font=("Arial", 14))
         self.label.pack(pady=20)
@@ -36,6 +29,9 @@ class Quiz:
         self.result = tk.Label(root, text="")
         self.result.pack()
 
+        # 👉 Enter sproži odgovor
+        self.root.bind("<Return>", self.check)
+
         self.show_question()
 
     def show_question(self):
@@ -44,11 +40,26 @@ class Quiz:
             self.label.config(text=f"Vprašanje {self.index+1}: {q}")
             self.entry.delete(0, tk.END)
         else:
-            self.label.config(text=f"Konec! Rezultat: {self.score}/10")
-            self.entry.pack_forget()
-            self.button.pack_forget()
+            percentage = (self.score / len(self.questions)) * 100
 
-    def check(self):
+            if percentage < 50:
+                self.label.config(
+                    text=f"Rezultat: {self.score}/{len(self.questions)} ({int(percentage)}%)\nPremalo! Ponovi kviz."
+                )
+                self.reset_quiz()
+            else:
+                self.label.config(
+                    text=f"Uspeh! Rezultat: {self.score}/{len(self.questions)} ({int(percentage)}%)"
+                )
+                self.entry.pack_forget()
+                self.button.pack_forget()
+
+    def reset_quiz(self):
+        self.score = 0
+        self.index = 0
+        self.root.after(2000, self.show_question)
+
+    def check(self, event=None):  # 👉 pomembno za Enter
         user = self.entry.get().lower().strip()
         correct = self.questions[self.index][1].lower()
 

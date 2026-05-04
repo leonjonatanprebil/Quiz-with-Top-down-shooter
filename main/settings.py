@@ -1,13 +1,15 @@
 import pygame as pg
 import time
 
+
+
 #Game setup
-font = pg.font.Font(None, 36)
+
 
 #Screen
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
-screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+SCREEN_WIDTH = 1920
+SCREEN_HEIGHT = 1080
+
 
 #Player settings
 PLAYER_START_POS_X = SCREEN_WIDTH//2
