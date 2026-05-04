@@ -1,12 +1,12 @@
 import random
 from settings import *
-from character.py import main.character as character 
+#from character import character as character 
 import math
 import time
-import main 
 import pygame as pg
 
-bullets = pg.sprite.Group() 
+clock = pg.time.Clock()
+bossbullets = pg.sprite.Group() 
 
 class weirdo(pg.sprite.Sprite):
     def __init__(self):
@@ -28,12 +28,12 @@ class weirdo(pg.sprite.Sprite):
 
     def handle_bullet_shooting(self):
         
-        if main.clock %3 == 0:
+        if clock %3 == 0:
             curr_time = time.time()
             dx = self.rect.x - self.rect.centerx
             dy = self.rect.y - self.rect.centery
             new_bullet = boss_bullets(self.rect.centerx, self.rect.centery, dx, dy)
-            bullets.add(new_bullet)
+            boss_bullets.add.add(new_bullet)
         else:
             
             print(random.choice(BOSS_BULLET_YES))

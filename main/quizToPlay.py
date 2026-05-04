@@ -29,7 +29,6 @@ class Quiz:
         self.result = tk.Label(root, text="")
         self.result.pack()
 
-        # 👉 Enter sproži odgovor
         self.root.bind("<Return>", self.check)
 
         self.show_question()
@@ -50,6 +49,8 @@ class Quiz:
             else:
                 self.label.config(
                     text=f"Uspeh! Rezultat: {self.score}/{len(self.questions)} ({int(percentage)}%)"
+                    #root.after(3000, root.destroy)
+
                 )
                 self.entry.pack_forget()
                 self.button.pack_forget()
@@ -59,7 +60,7 @@ class Quiz:
         self.index = 0
         self.root.after(2000, self.show_question)
 
-    def check(self, event=None):  # 👉 pomembno za Enter
+    def check(self, event=None): 
         user = self.entry.get().lower().strip()
         correct = self.questions[self.index][1].lower()
 
@@ -73,6 +74,4 @@ class Quiz:
         self.root.after(1000, self.show_question)
 
 
-root = tk.Tk()
-app = Quiz(root)
-root.mainloop()
+

@@ -1,7 +1,6 @@
 import pygame as pg
 from settings import *
 import math
-import main
 
 
 bullets = pg.sprite.Group() 
@@ -40,7 +39,7 @@ class Player(pg.sprite.Sprite):
             self.rect.x += self.speed
         if keys[pg.K_r]:
             self.mag = BULLETS_MAG_SIZE
-        self.rect.clamp_ip(main.screen.get_rect())  
+        
 
     def rotate_towards_mouse(self):
         mouse_pos = pg.mouse.get_pos()
